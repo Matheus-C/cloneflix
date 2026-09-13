@@ -8,7 +8,10 @@ import Search from "./pages/Search";
 import Details from "./pages/Details";
 
 function PrivateLayout() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+  if (loading)
+    return <div style={{ color: "#fff", padding: 40 }}>Carregando...</div>;
   if (!user) return <Navigate to="/login" replace />;
 
   return (
