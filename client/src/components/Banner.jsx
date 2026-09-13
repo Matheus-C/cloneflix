@@ -3,7 +3,7 @@ import VideoModal from "../components/VideoModal";
 import { Link } from "react-router-dom";
 import { searchTitles, getTitleById } from "../api/omdb";
 import "./css/Banner.css";
-
+import { noImg } from "../assets";
 const FEATURED_QUERIES = ["Avengers", "Batman", "Inception", "Interstellar"];
 
 export default function Banner() {
@@ -30,7 +30,7 @@ export default function Banner() {
 
   if (!movie) return <div className="banner banner--empty" />;
 
-  const bg = movie.Poster !== "N/A" ? movie.Poster : "";
+  const bg = movie.Poster !== "N/A" ? movie.Poster : noImg;
   const imdb = movie.Ratings?.find(
     (r) => r.Source === "Internet Movie Database",
   );

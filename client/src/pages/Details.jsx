@@ -32,7 +32,7 @@ export default function Details() {
       </div>
     );
 
-  const poster = data.Poster && data.Poster !== "N/A" ? data.Poster : "";
+  const poster = data.Poster && data.Poster !== "N/A" ? data.Poster : noImg;
 
   const ratings = data.Ratings || [];
   const imdb = ratings.find((r) => r.Source === "Internet Movie Database");

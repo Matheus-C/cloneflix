@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import "./css/MovieCard.css";
+import { noImg } from "../assets";
 
 export default function MovieCard({ movie }) {
-  const poster = movie.Poster && movie.Poster !== "N/A" ? movie.Poster : "";
+  const poster = movie.Poster && movie.Poster !== "N/A" ? movie.Poster : noImg;
 
   return (
     <Link to={`/title/${movie.imdbID}`} className="movie-card">
