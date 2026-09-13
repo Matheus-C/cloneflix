@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import VideoModal from "../components/VideoModal";
 import { useParams, useNavigate } from "react-router-dom";
 import { getTitleById } from "../api/omdb";
 import "./css/Details.css";
@@ -8,6 +9,7 @@ export default function Details() {
   const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -84,9 +86,20 @@ export default function Details() {
             </li>
           </ul>
 
-          <button className="details__play">▶ Assistir</button>
+          <button
+            className="details__play"
+            onClick={() => setIsModalOpen(true)}
+          >
+            ▶ Assistir
+          </button>
         </div>
       </div>
+      <VideoModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        embedUrl={getEmbedUrl(data.Type, data.imdbID)}
+        title={data.Title}
+      />
     </div>
   );
 }

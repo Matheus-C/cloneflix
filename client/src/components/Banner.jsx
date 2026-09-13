@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import VideoModal from "../components/VideoModal";
 import { Link } from "react-router-dom";
 import { searchTitles, getTitleById } from "../api/omdb";
 import "./css/Banner.css";
@@ -7,6 +8,7 @@ const FEATURED_QUERIES = ["Avengers", "Batman", "Inception", "Interstellar"];
 
 export default function Banner() {
   const [movie, setMovie] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const load = async () => {
@@ -42,14 +44,23 @@ export default function Banner() {
           {movie.Year} • IMDb: {rating !== null ? rating : "Indisponível"}
         </p>
         <div className="banner__actions">
-          <Link to={`/title/${movie.imdbID}`} className="banner__btn play">
+          <button
+            className="banner__btn play"
+            onClick={() => setIsModalOpen(true)}
+          >
             ▶ Assistir
-          </Link>
+          </button>
           <Link to={`/title/${movie.imdbID}`} className="banner__btn info">
             ℹ Mais informações
           </Link>
         </div>
       </div>
+      <VideoModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        embedUrl={getEmbedUrl(movie.Type, movie.imdbID)}
+        title={movie.Title}
+      />
     </header>
   );
 }

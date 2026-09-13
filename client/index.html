@@ -10,6 +10,18 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
+
+
+  <script>
+    function getEmbedUrl(t, i, s, e) {
+      if (t == "movie") { s = ""; e = ""; t = "filme" }
+      if (t == "series") { s = "1"; e = "1"; t = "serie" }
+      var f = document.getElementById("PlayerContainer");
+      var u = "https://superflixapi.monster/" + t + "/" + i + "/" + s + "/" + e;
+      u = u.replace(/([^:])(\/{2,})/, "$1/");
+      return u;
+    }
+  </script>
 </body>
 
 </html>
