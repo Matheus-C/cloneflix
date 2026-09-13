@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User').default;
+const User = require('../models/User');
 
 const router = express.Router();
 
@@ -49,6 +49,7 @@ router.post('/login', async (req, res) => {
       token: generateToken(user._id),
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ message: 'Erro no servidor' });
   }
 });
