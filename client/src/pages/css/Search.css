@@ -1,0 +1,16 @@
+.search {
+  padding: 120px 40px 40px;
+}
+.search h1 {
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+.search__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+.search__grid .movie-card {
+  width: 100%;
+  min-width: 0;
+}

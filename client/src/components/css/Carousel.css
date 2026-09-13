@@ -1,0 +1,44 @@
+.carousel {
+  margin: 24px 0;
+}
+.carousel h2 {
+  font-size: 20px;
+  margin: 0 40px 12px;
+}
+.carousel__wrapper {
+  position: relative;
+}
+.carousel__track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding: 8px 40px;
+}
+.carousel__track::-webkit-scrollbar {
+  display: none;
+}
+.carousel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  font-size: 32px;
+  width: 40px;
+  height: 100px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.carousel__wrapper:hover .carousel__btn {
+  opacity: 1;
+}
+.carousel__btn.left {
+  left: 0;
+}
+.carousel__btn.right {
+  right: 0;
+}

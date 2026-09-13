@@ -1,0 +1,30 @@
+.movie-card {
+  min-width: 180px;
+  width: 180px;
+  transition: transform 0.25s ease;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #1f1f1f;
+}
+.movie-card:hover {
+  transform: scale(1.08);
+  z-index: 2;
+}
+.movie-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
+.movie-card__info {
+  padding: 8px 10px;
+}
+.movie-card__info h4 {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.movie-card__info span {
+  font-size: 11px;
+  color: #bbb;
+}

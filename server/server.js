@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 
-app.get('/', (_, res) => res.json({ ok: true, message: 'API do Netflix Clone' }));
+app.get('/', (_, res) => res.json({ ok: true, message: 'API do Cloneflix' }));
 
 const PORT = process.env.PORT || 5000;
 
