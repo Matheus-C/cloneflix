@@ -3,6 +3,7 @@ import VideoModal from "../components/VideoModal";
 import { useFavorites } from "../context/FavoritesContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { getTitleById } from "../api/omdb";
+import { noImg } from "../assets";
 import "./css/Details.css";
 
 export default function Details() {
@@ -11,6 +12,7 @@ export default function Details() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [bgImg, setBgImg] = useState(noImg);
 
   useEffect(() => {
     setLoading(true);
@@ -19,6 +21,23 @@ export default function Details() {
       setLoading(false);
     });
   }, [id]);
+
+  useEffect(() => {
+    if (!data?.Poster || data.Poster === "N/A") {
+      setBgImg(noImg);
+      return;
+    }
+
+    const img = new Image();
+    img.src = data.Poster;
+    img.onload = () => setBgImg(data.Poster);
+    img.onerror = () => setBgImg(noImg);
+
+    return () => {
+      img.onload = null;
+      img.onerror = null;
+    };
+  }, [data]);
 
   if (loading)
     return (
@@ -33,8 +52,6 @@ export default function Details() {
       </div>
     );
 
-  const poster = data.Poster && data.Poster !== "N/A" ? data.Poster : noImg;
-
   const ratings = data.Ratings || [];
   const imdb = ratings.find((r) => r.Source === "Internet Movie Database");
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -47,13 +64,21 @@ export default function Details() {
 
       <div
         className="details__hero"
-        style={{ backgroundImage: `url(${poster})` }}
+        style={{ backgroundImage: `url(${bgImg})` }}
       >
         <div className="details__overlay" />
       </div>
 
       <div className="details__content">
-        <img src={poster} alt={data.Title} className="details__poster" />
+        <img
+          src={bgImg}
+          alt={data.Title}
+          className="details__poster"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = noImg;
+          }}
+        />
 
         <div className="details__info">
           <h1>{data.Title}</h1>

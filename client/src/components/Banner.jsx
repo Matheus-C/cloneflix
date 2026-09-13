@@ -9,6 +9,7 @@ const FEATURED_QUERIES = ["Avengers", "Batman", "Inception", "Interstellar"];
 export default function Banner() {
   const [movie, setMovie] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [bgImg, setBgImg] = useState(noImg);
 
   useEffect(() => {
     const load = async () => {
@@ -28,16 +29,32 @@ export default function Banner() {
     load();
   }, []);
 
+  useEffect(() => {
+    if (!movie?.Poster || movie.Poster === "N/A") {
+      setBgImg(noImg);
+      return;
+    }
+
+    const img = new Image();
+    img.src = movie.Poster;
+    img.onload = () => setBgImg(movie.Poster);
+    img.onerror = () => setBgImg(noImg);
+
+    return () => {
+      img.onload = null;
+      img.onerror = null;
+    };
+  }, [movie]);
+
   if (!movie) return <div className="banner banner--empty" />;
 
-  const bg = movie.Poster !== "N/A" ? movie.Poster : noImg;
   const imdb = movie.Ratings?.find(
     (r) => r.Source === "Internet Movie Database",
   );
   const rating = imdb ? imdb.Value : movie.imdbRating || null;
 
   return (
-    <header className="banner" style={{ backgroundImage: `url(${bg})` }}>
+    <header className="banner" style={{ backgroundImage: `url(${bgImg})` }}>
       <div className="banner__overlay">
         <h1>{movie.Title}</h1>
         <p>

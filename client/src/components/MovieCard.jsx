@@ -17,7 +17,15 @@ export default function MovieCard({ movie }) {
 
   return (
     <Link to={`/title/${movie.imdbID}`} className="movie-card">
-      <img src={poster} alt={movie.Title} loading="lazy" />
+      <img
+        src={poster}
+        alt={movie.Title}
+        loading="lazy"
+        onError={(e) => {
+          e.currentTarget.onerror = null;
+          e.currentTarget.src = noImg;
+        }}
+      />
       <button
         className={`movie-card__fav ${fav ? "active" : ""}`}
         onClick={handleFav}
