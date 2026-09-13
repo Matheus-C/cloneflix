@@ -3,8 +3,9 @@
 # Instruções
 
 1. para executar localmente é necessário ter instalado o node.js https://nodejs.org/en/download
-2. IMPORTANTE adicione um arquivo .env dentro da pasta server com o seguinte conteúdo: MONGO_URI=mongodb+srv://cloneflixClient:OtFrO89HTbxpiZ18@cloneflix.24gwory.mongodb.net/?appName=cloneflix 
-PORT=5000 
+2. IMPORTANTE adicione um arquivo .env dentro da pasta server com o seguinte conteúdo:
+MONGO_URI=mongodb+srv://cloneflixClient:OtFrO89HTbxpiZ18@cloneflix.24gwory.mongodb.net/?appName=cloneflix
+PORT=5000
 JWT_SECRET=string
 3. IMPORTANTE adicione um arquivo .env dentro da pasta client com o seguinte conteúdo: 
 VITE_API_URL=http://localhost:5000/api 
