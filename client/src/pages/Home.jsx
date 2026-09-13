@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Banner from "../components/Banner";
 import Carousel from "../components/Carousel";
 import { searchTitles } from "../api/omdb";
+import { useFavorites } from "../context/FavoritesContext";
 
 const CATEGORIES = [
   { title: "Em Alta", query: "Marvel" },
@@ -17,6 +18,7 @@ const CATEGORIES = [
 export default function Home() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { favorites } = useFavorites();
 
   useEffect(() => {
     const load = async () => {
@@ -37,6 +39,9 @@ export default function Home() {
     <div className="home">
       <Banner />
       <div style={{ paddingTop: 24 }}>
+        {favorites.length > 0 && (
+          <Carousel title="Meus Favoritos" items={favorites} />
+        )}
         {loading ? (
           <p style={{ padding: "0 40px" }}>Carregando catálogo...</p>
         ) : (

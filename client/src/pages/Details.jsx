@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import VideoModal from "../components/VideoModal";
+import { useFavorites } from "../context/FavoritesContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { getTitleById } from "../api/omdb";
 import "./css/Details.css";
@@ -36,7 +37,8 @@ export default function Details() {
 
   const ratings = data.Ratings || [];
   const imdb = ratings.find((r) => r.Source === "Internet Movie Database");
-
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const fav = isFavorite(data.imdbID);
   return (
     <div className="details">
       <button className="details__back" onClick={() => navigate(-1)}>
@@ -91,6 +93,12 @@ export default function Details() {
             onClick={() => setIsModalOpen(true)}
           >
             ▶ Assistir
+          </button>
+          <button
+            className={`details__fav ${fav ? "active" : ""}`}
+            onClick={() => toggleFavorite(data)}
+          >
+            {fav ? "❤️ Nos favoritos" : "🤍 Favoritar"}
           </button>
         </div>
       </div>

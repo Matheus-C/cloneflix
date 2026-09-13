@@ -6,12 +6,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
+const favoritesRoutes = require('./routes/favorites')
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/favorites', favoritesRoutes);
 
 app.get('/', (_, res) => res.json({ ok: true, message: 'API do Cloneflix' }));
 
